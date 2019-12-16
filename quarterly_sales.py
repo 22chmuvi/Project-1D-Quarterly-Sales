@@ -3,6 +3,7 @@
 # 12/6/19
 # Project 1D: Quarterly Sales
 
+# grids
 grid = [[" ", " ", " "],
         [" ", " ", " "],
         [" ", " ", " "]]
@@ -13,7 +14,7 @@ turn = 'x'
 win_com = [[1,2,3],[4,5,6],[7,8,9],[1,5,9],
            [1,4,7],[2,5,8],[3,6,9],[3,5,7]]
 
-# 
+# displays welcome message
 def main():
     print(grid[0][0], grid[0][1], grid[0][2])
     print(grid[1][0], grid[1][1], grid[1][2])
@@ -31,11 +32,10 @@ def show():
     print("|" ,grid[2][0], "|" ,grid[2][1], "|" ,grid[2][2], "|")
     print("+---+---+---+")
 
+# list in lists for grids
 full_grid = [[grid[0][0]], [grid[0][1]], [grid[0][2]], [grid[1][0]], [grid[1][1]], [grid[1][2]], [grid[2][0]], [grid[2][1]], [grid[2][2]]]
 
-# place x on grid[row_choice][column_choice]
-
-
+# pick a row and a column
 while True:
     show()
     if turn == 'x':
@@ -48,8 +48,8 @@ while True:
         if column_choice < 1 or column_choice > 3:
             print("Try again.")
         else:
-            full_grid.insert(row_choice, "x")
-
+            grid[row_choice - 1][column_choice - 1] = "x"
+        
         x_win = 0
         # check for x win
         if grid[0][0] == "x" and grid[0][1] == "x" and grid[0][2] == "x":
@@ -87,10 +87,8 @@ while True:
         column_choice = int(input("Pick a column (1,2,3): "))
         if column_choice < 1 or column_choice > 3:
             print("Try again.")
-
-        # place o on grid[row_choice][column_choice]
-
-
+        else:
+            grid[row_choice - 1][column_choice - 1] = "o"
 
         o_win = 0
         # check for o win
@@ -118,5 +116,4 @@ while True:
 
         turn = 'x'
         continue
-
 
