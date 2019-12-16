@@ -32,6 +32,18 @@ def show():
     print("|" ,grid[2][0], "|" ,grid[2][1], "|" ,grid[2][2], "|")
     print("+---+---+---+")
 
+def selection(turn):
+    print(turn.upper() + "'s turn")
+    row_choice = int(input("Pick a row (1,2,3): "))
+    if row_choice < 1 or row_choice > 3:
+        print("Try again.")
+
+    column_choice = int(input("Pick a column (1,2,3): "))
+    if column_choice < 1 or column_choice > 3:
+        print("Try again.")
+
+    return row_choice, column_choice
+
 # list in lists for grids
 full_grid = [[grid[0][0]], [grid[0][1]], [grid[0][2]], [grid[1][0]], [grid[1][1]], [grid[1][2]], [grid[2][0]], [grid[2][1]], [grid[2][2]]]
 
@@ -39,14 +51,10 @@ full_grid = [[grid[0][0]], [grid[0][1]], [grid[0][2]], [grid[1][0]], [grid[1][1]
 while True:
     show()
     if turn == 'x':
-        print("X's turn")
-        row_choice = int(input("Pick a row (1,2,3): "))
-        if row_choice < 1 or row_choice > 3:
-            print("Try again.")
-            
-        column_choice = int(input("Pick a column (1,2,3): "))
-        if column_choice < 1 or column_choice > 3:
-            print("Try again.")
+        row_choice, column_choice = selection(turn)
+        while grid[row_choice - 1][column_choice - 1] == "o" or grid[row_choice - 1][column_choice - 1] == "x":
+            print("Taken")
+            row_choice, column_choice = selection(turn)
         else:
             grid[row_choice - 1][column_choice - 1] = "x"
         
@@ -78,15 +86,11 @@ while True:
         turn = 'o'
         continue
     # if turn is o:
-    if turn == 'o':
-        print("O's turn")
-        row_choice = int(input("Pick a row (1,2,3): "))
-        if row_choice < 1 or row_choice > 3:
-            print("Try again.")
-
-        column_choice = int(input("Pick a column (1,2,3): "))
-        if column_choice < 1 or column_choice > 3:
-            print("Try again.")
+    if turn == 'o':           
+        row_choice, column_choice = selection(turn)
+        while grid[row_choice - 1][column_choice - 1] == "x" or grid[row_choice - 1][column_choice - 1] == "o":
+            print("Taken")
+            row_choice, column_choice = selection(turn)
         else:
             grid[row_choice - 1][column_choice - 1] = "o"
 
